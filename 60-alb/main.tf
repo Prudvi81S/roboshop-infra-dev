@@ -2,7 +2,7 @@ module "ingress_alb" {
   source = "terraform-aws-modules/alb/aws"
 
   internal = false
-  name    = "${local.resource_name}-ingress-alb" #expense-dev-app-alb
+  name    = "${local.resource_name}-ingress-alb" #roboshop-dev-app-alb
   vpc_id  = local.vpc_id
   subnets = local.public_subnet_ids
   security_groups = [data.aws_ssm_parameter.ingress_alb_sg_id.value]
@@ -66,7 +66,7 @@ module "records" {
   ]
 }
 
-resource "aws_lb_target_group" "expense" {
+resource "aws_lb_target_group" "roboshop" {
   name     = local.resource_name
   port     = 80
   protocol = "HTTP"
@@ -91,12 +91,12 @@ resource "aws_lb_listener_rule" "frontend" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.expense.arn
+    target_group_arn = aws_lb_target_group.roboshop.arn
   }
 
   condition {
     host_header {
-      values = ["expense-${var.environment}.${var.zone_name}"] #expense-dev.daws81s.online
+      values = ["roboshop-${var.environment}.${var.zone_name}"] #roboshop-dev.daws81s.online
     }
   }
 }

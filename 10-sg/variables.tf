@@ -1,5 +1,5 @@
 variable "project_name" {
-    default = "expense"
+    default = "roboshop"
 }
 
 variable "environment" {
@@ -8,7 +8,7 @@ variable "environment" {
 
 variable "common_tags" {
     default = {
-        Project = "expense"
+        Project = "roboshop"
         Terraform = "true"
         Environment = "dev"
     }
@@ -35,11 +35,5 @@ variable "frontend_sg_tags" {
 variable "bastion_sg_tags" {
     default = {
         Component = "bastion"
-    }
-}
-
-variable "ansible_sg_tags" {
-    default = {
-        Component = "ansible"
     }
 }
